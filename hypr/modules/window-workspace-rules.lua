@@ -37,12 +37,20 @@ hl.window_rule({
     no_focus = true,
 })
 
+
 hl.workspace_rule({ workspace = "1", monitor = "", persistent = true })
 hl.workspace_rule({ workspace = "2", monitor = "", persistent = true })
 hl.workspace_rule({ workspace = "3", monitor = "", persistent = true })
-hl.workspace_rule({ workspace = "4", monitor = "", persistent = true })
-hl.workspace_rule({ workspace = "5", monitor = "", persistent = true })
+--hl.workspace_rule({ workspace = "4", monitor = "", persistent = true })
+--hl.workspace_rule({ workspace = "5", monitor = "", persistent = true })
+-- Workspace rule for gaps
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0 })
 
+-- Window rule for rounding (applies rounding:0 to windows on single-window workspaces)
+hl.window_rule({
+  match = { workspace = "w[tv1]" },
+  rounding = 0,
+})
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({
 --     name  = "no-anim-overlay",
@@ -106,5 +114,45 @@ hl.window_rule({
     class = "com.mitchellh.ghostty"
   },
   -- Opacity format: <active> <inactive> <fullscreen>
-  opacity = "0.85 override 0.85 override 1.0 override"
+
+    opacity = "0.85 override 0.85 override 1.0 override",
+    float = true,
+     size = { 900, 700},
+    --center = true
+})
+-- --- Steam Main Window & Popups ---
+-- --- Steam Windows ---
+-- 1. Float and center ALL Steam windows by default (Friends, Properties, Popups, etc.)
+hl.window_rule({
+    match = { class = "^steam$" },
+    float = true,
+    center = true
+})
+
+-- 2. Force ONLY the main Steam window to remain tiled
+hl.window_rule({
+    match = { class = "^steam$", title = "^Steam$" },
+    float = false
+})
+
+-- --- File Pickers & Desktop Portals ---
+-- XDG Desktop Portals (GTK, KDE, Hyprland portal implementations)
+hl.window_rule({
+    match = { class = "^xdg-desktop-portal-.*$" },
+    float = true,
+    center = true
+})
+
+-- Common standard file dialogue titles
+hl.window_rule({
+    match = { title = "^(Open File|Select a File|Save As|Open Folder|Choose Files|All Files)$" },
+    float = true,
+    center = true
+})
+
+hl.window_rule({
+    match = { title = "Picture-in-Picture" },
+    float = true,
+    pin = true,
+    center = true
 })

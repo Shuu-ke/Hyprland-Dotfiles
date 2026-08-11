@@ -3,7 +3,6 @@
 local defaultApps = require("modules.defaultApps")
 local terminal    = defaultApps.terminal
 local fileManager = defaultApps.fileManager
-local menu        = defaultApps.menu
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
@@ -15,7 +14,6 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -80,9 +78,44 @@ hl.bind(mainMod .. "+SHIFT" .. "+S", hl.dsp.exec_cmd("noctalia msg screenshot-re
 --hl.bind("mouse:275", hl.dsp.pass({ window = "class:^(discord)$" }))
 --
 -- Unmute mic when mouse:275 is pressed
-hl.bind("mouse:276", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0"))
+--hl.bind("mouse:276", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0"))
 
 -- Mute mic when mouse:275 is released
-hl.bind("mouse:276", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1"), { release = true })
+--hl.bind("mouse:276", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1"), { release = true })
 
 hl.bind("ALT + TAB", hl.dsp.exec_cmd("noctalia msg window-switcher"))
+
+local micMuteTimer = nil
+
+-- Unmute mic when mouse:276 is pressed
+hl.bind("mouse:276", function()
+    if micMuteTimer then
+        micMuteTimer:set_enabled(false)
+        micMuteTimer = nil
+    end
+    hl.dispatch(hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0"))
+end)
+
+-- Mute mic when mouse:276 is released (delayed, cancels any stale timer first)
+hl.bind("mouse:276", function()
+    if micMuteTimer then
+        micMuteTimer:set_enabled(false)
+    end
+    micMuteTimer = hl.timer(function()
+        hl.dispatch(hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1"))
+        micMuteTimer = nil
+    end, { timeout = 300, type = "oneshot" })
+end, { release = true })
+
+
+
+--plugin Keybindings
+-- GLOVIEUW
+
+--hl.bind("SUPER + TAB", hl.plugin.gloview.toggle)
+--hl.bind("SUPER + SHIFT + TAB", hl.plugin.gloview.desktop)
+--hl.bind("SUPER + CTRL + TAB", hl.plugin.gloview.allworkspaces)
+
+--hl.bind("SUPER + bracketright", hl.plugin.gloview.next)
+--hl.bind("SUPER + bracketleft", hl.plugin.gloview.prev)
+--hl.bind("SUPER + 2", function() hl.plugin.gloview.setworkspace(2) end)

@@ -1,0 +1,120 @@
+* {
+  all: unset;
+  font-family: JetBrains Mono NF;
+  color: #ECF2F8;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.window {
+  border-radius: 5px;
+  background-color: #0D1117;
+  border: solid 2px #21262D;
+  margin: 2px;
+}
+
+tabs {
+    padding: 0.5rem 1rem;
+}
+
+tabs > tab {
+    margin-right: 1rem;
+}
+
+.tab-label {
+    color: #89929B;
+    transition: all 0.2s ease;
+}
+
+tabs > tab:checked > .tab-label, tabs > tab:active > .tab-label {
+    text-decoration: underline currentColor;
+    color: #ECF2F8;
+}
+
+tabs > tab:focus > .tab-label {
+    color: #ECF2F8;
+}
+
+.page {
+    padding: 1rem;
+}
+
+.image-label {
+    font-size: 12px;
+    padding: 0.25rem;
+}
+
+flowboxchild > .card, button > .card {
+    transition: all 0.2s ease;
+    border: solid 2px transparent;
+    border-color: #161B22;
+    border-radius: 5px;
+    background-color: #161B22;
+    padding: 5px;
+}
+
+flowboxchild:active > .card, flowboxchild:selected > .card, button:active > .card, button:selected > .card, button:focus > .card {
+    border: solid 2px #61AFEF;
+}
+
+.image {
+    border-radius: 5px;
+}
+
+.region-button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #61AFEF;
+    color: #161B22;
+    transition: all 0.2s ease;
+}
+
+.region-button:not(:disabled):hover, .region-button:not(:disabled):focus {
+    background-color: #2472C8;
+}
+
+.region-button:disabled {
+    background-color: #89929B;
+    color: #21262D;
+}
+
+/* Style the checkbutton container */
+.restore-button {
+    padding: 0.5rem 1rem;
+    color: #89929B;
+}
+
+/* Draw the actual checkbox box */
+.restore-button check {
+    min-width: 16px;
+    min-height: 16px;
+    margin-right: 8px;
+    border: 2px solid #21262D;
+    border-radius: 4px;
+    background-color: #161B22;
+}
+
+/* Style when hover */
+.restore-button:hover check {
+    border-color: #61AFEF;
+}
+
+/* Style when checked / active */
+.restore-button:checked check,
+check:checked {
+    background-color: #61AFEF;
+    border-color: #61AFEF;
+}
+
+/* Completely hide the Region tab header */
+tabs > tab:nth-child(3) {
+    min-width: 0px;
+    min-height: 0px;
+    margin: 0px;
+    padding: 0px;
+    opacity: 0;
+}
+
+tabs > tab:nth-child(3) * {
+    font-size: 0px;
+}

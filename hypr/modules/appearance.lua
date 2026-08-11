@@ -17,7 +17,7 @@ hl.config({
         resize_on_border = true,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
+        allow_tearing = true,
 
         layout = "dwindle",
     },
@@ -44,17 +44,27 @@ hl.config({
             enabled   = true,
             size      = 8,
             passes    = 2,
-            vibrancy  = 0.1696,
+            vibrancy = 0.1696,
+              new_optimizations = true,
         },
     },
 
     render = {
         cm_auto_hdr = true,
+       -- direct_scanout = true,
     },
 
     xwayland = {
         force_zero_scaling = true,
+        use_nearest_neighbor = true
     },
+
+    binds = {
+            allow_workspace_cycles = true,
+            pass_mouse_when_bound = true,
+        },
+
+
 
 })
 

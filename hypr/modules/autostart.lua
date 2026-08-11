@@ -9,3 +9,7 @@ end)
 hl.on("hyprland.start", function ()
     hl.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1")
 end)
+
+hl.on("hyprland.start", function()
+    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+end)

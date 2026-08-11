@@ -1,8 +1,8 @@
 -- Set programs that you use
 
 local defaultApps = {
-    terminal    = "kitty",
-    fileManager = "dolphin",
+    terminal    = "ghostty",
+    fileManager = "thunar",
     menu        = "hyprlauncher",
 }
 

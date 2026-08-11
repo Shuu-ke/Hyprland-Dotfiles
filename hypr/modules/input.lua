@@ -33,3 +33,10 @@ hl.device({
     accel_profile = "flat",
 
 })
+
+-- Add a dedicated device block for the virtual input-remapper device
+hl.device({
+    name = "razer-razer-basilisk-v3-2",
+    sensitivity = -0.7,                         -- Match your desired sensitivity
+    accel_profile = "flat",                  -- Match your profile if you use flat/no accel
+})
