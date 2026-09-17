@@ -23,6 +23,7 @@ hl.config({
     },
     cursor = {
             no_hardware_cursors = true, -- toggle to false if this doesn't help
+
     },
 
     decoration = {
@@ -51,18 +52,24 @@ hl.config({
 
     render = {
         cm_auto_hdr = true,
-       -- direct_scanout = true,
+        --direct_scanout = 1,
+        -- non_shader_cm = 1  # Use if compositor interference causes freezes
+
     },
 
     xwayland = {
         force_zero_scaling = true,
-        use_nearest_neighbor = true
+
     },
 
     binds = {
             allow_workspace_cycles = true,
             pass_mouse_when_bound = true,
         },
+        misc = {
+               enable_anr_dialog = false,   -- or use anr_missed_pings instead, see below
+           },
+
 
 
 

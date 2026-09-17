@@ -2,16 +2,19 @@
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 hl.env("XCURSOR_SIZE", "32")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_THEME", "WhiteSur_hypr")
-hl.env("XCURSOR_THEME", "WhiteSur-Cursors")
+-- Native Hyprcursor Variables
+hl.env("HYPRCURSOR_THEME", "macOS")
+hl.env("HYPRCURSOR_SIZE", "28")
+hl.env("XCURSOR_THEME", "McMojave-cursors")
 
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND", "direct")
-hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
-hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+-- optional: reduces the GPU power-state penalty NVDEC decode otherwise causes
+hl.env("CUDA_DISABLE_PERF_BOOST", "1")
+-- Export display environment to DBus daemon on startup
+--hl.exec("dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland")
 
 hl.env("GBM_BACKEND", "nvidia-drm")
 

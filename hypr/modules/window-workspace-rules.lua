@@ -11,7 +11,7 @@ local suppressMaximizeRule = hl.window_rule({
 
     suppress_event = "maximize",
 })
-suppressMaximizeRule:set_enabled(true)
+suppressMaximizeRule:set_enabled(false)
 
 local suppressFullscreenRule = hl.window_rule({
     -- Ignore fullscreen requests from all apps.
@@ -87,7 +87,7 @@ hl.layer_rule({
 })
 
 -- For Noctalia Color templates
-require("noctalia").apply_theme()
+--require("noctalia").apply_theme()
 
 -- Automatically float and center child windows
 hl.window_rule({
@@ -99,24 +99,25 @@ hl.window_rule({
     center = true,
 })
 
+
 hl.window_rule({
-  name = "thunar-transparency", -- Naming is optional but helps with organization
+  name = "nautilus-transparency", -- Naming is optional but helps with organization
   match = {
-    class = "thunar"
+    class = "org.gnome.Nautilus"
   },
   -- Opacity format: <active> <inactive> <fullscreen>
   opacity = "0.85 override 0.85 override 1.0 override"
 })
 
 hl.window_rule({
-  name = "ghostty-transparency", -- Naming is optional but helps with organization
+  name = "kitty-transparency", -- Naming is optional but helps with organization
   match = {
-    class = "com.mitchellh.ghostty"
+    class = "kitty"
   },
   -- Opacity format: <active> <inactive> <fullscreen>
 
     opacity = "0.85 override 0.85 override 1.0 override",
-    float = true,
+   -- float = true,
      size = { 900, 700},
     --center = true
 })
